@@ -1,0 +1,8 @@
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\bin\Debug\netcoreapp3.1\Bloghost.Infrastructure.deps.json
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\bin\Debug\netcoreapp3.1\Bloghost.Infrastructure.dll
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\bin\Debug\netcoreapp3.1\Bloghost.Infrastructure.pdb
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\obj\Debug\netcoreapp3.1\Bloghost.Infrastructure.csprojAssemblyReference.cache
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\obj\Debug\netcoreapp3.1\Bloghost.Infrastructure.AssemblyInfoInputs.cache
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\obj\Debug\netcoreapp3.1\Bloghost.Infrastructure.AssemblyInfo.cs
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\obj\Debug\netcoreapp3.1\Bloghost.Infrastructure.dll
+D:\Projects\dotnet\Bloghost\Bloghost.Infrastructure\obj\Debug\netcoreapp3.1\Bloghost.Infrastructure.pdb
