@@ -1,0 +1,8 @@
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\bin\Debug\netstandard2.0\Bloghost.Domain.deps.json
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\bin\Debug\netstandard2.0\Bloghost.Domain.dll
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\bin\Debug\netstandard2.0\Bloghost.Domain.pdb
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\obj\Debug\netstandard2.0\Bloghost.Domain.csprojAssemblyReference.cache
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\obj\Debug\netstandard2.0\Bloghost.Domain.AssemblyInfoInputs.cache
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\obj\Debug\netstandard2.0\Bloghost.Domain.AssemblyInfo.cs
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\obj\Debug\netstandard2.0\Bloghost.Domain.dll
+D:\Projects\dotnet\Bloghost\Bloghost.Domain\obj\Debug\netstandard2.0\Bloghost.Domain.pdb
