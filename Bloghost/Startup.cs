@@ -30,7 +30,7 @@ namespace Bloghost
             //string connection = Configuration.GetConnectionString("DefaultConnection");
             //services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connection));
 
-            //services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDBContext>();
+            //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<ApplicationDBContext>();
             services.AddMvc();
         }
 

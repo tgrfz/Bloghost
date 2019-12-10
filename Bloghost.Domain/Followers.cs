@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Bloghost.Domain
 {
-    public class Role
+    public class Followers
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Role()
+        public List<User> Users { get; set; }
+        public Followers()
         {
+            Users = new List<User>();
         }
     }
 }

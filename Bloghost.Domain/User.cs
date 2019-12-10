@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bloghost.Domain
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
-        public string Username { get; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public DateTime CreateTime { get; set; }     
-        //public List<Post> Posts { get; set; }
-        //public List<Comment> Comments { get; set; }
-        //public List<User> Followers { get; set; }
-        //public List<User> Following { get; set; }
-        public int RoleId { get; set; }
-        public Role Role { get; set; }
-
-        public User()
+        public DateTime CreateTime { get; set; }
+        public List<Post> Posts { get; set; }
+        public List<Comment> Comments { get; set; }
+        public int FollowersId { get; set; }
+        public Followers Followers { get; set; }
+        public int FollowingId { get; set; }
+        public Following Following { get; set; }
+        public User() : base()
         {
             CreateTime = DateTime.Now;
-            //Posts = new List<Post>();
-            //Comments = new List<Comment>();
-            //Followers = new List<User>();
-            //Following = new List<User>();
+            Followers = new Followers();
+            FollowersId = Followers.Id;
+            Following = new Following();
+            FollowingId = Following.Id;
+            Posts = new List<Post>();
+            Comments = new List<Comment>();
         }
     }
 }

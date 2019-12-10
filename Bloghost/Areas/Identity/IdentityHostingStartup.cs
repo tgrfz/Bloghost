@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Bloghost.Domain;
 
 [assembly: HostingStartup(typeof(Bloghost.Areas.Identity.IdentityHostingStartup))]
 namespace Bloghost.Areas.Identity
@@ -19,9 +20,9 @@ namespace Bloghost.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddTransient<UserValidator<IdentityUser>, CustomUserValidator>();
+                services.AddTransient<UserValidator<User>, CustomUserValidator>();
 
-                services.AddDefaultIdentity<IdentityUser>(options => {
+                services.AddDefaultIdentity<User>(options => {
                     options.SignIn.RequireConfirmedAccount = true;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireDigit = false;
