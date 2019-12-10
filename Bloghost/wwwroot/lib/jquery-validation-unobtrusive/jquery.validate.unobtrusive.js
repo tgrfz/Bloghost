@@ -376,7 +376,8 @@
             fullOtherName = appendModelPrefix(other, prefix),
             element = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(fullOtherName) + "']")[0];
 
-        setValidationValues(options, "equalTo", element);
+        set
+        Values(options, "equalTo", element);
     });
     adapters.add("required", function (options) {
         // jQuery Validate equates "required" with "mandatory" for checkbox elements

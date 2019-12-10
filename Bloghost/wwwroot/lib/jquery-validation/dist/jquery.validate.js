@@ -1036,7 +1036,8 @@ $.extend( $.validator, {
 			return this.groups[ element.name ] || ( this.checkable( element ) ? element.name : element.id || element.name );
 		},
 
-		validationTargetFor: function( element ) {
+
+		TargetFor: function (element) {
 
 			// If radio/checkbox, validate first element in group instead
 			if ( this.checkable( element ) ) {
