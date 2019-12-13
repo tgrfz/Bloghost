@@ -30,8 +30,9 @@ namespace Bloghost.Areas.Identity
                     options.Password.RequireLowercase = false;
                     options.User.RequireUniqueEmail = true;
                     options.User.AllowedUserNameCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-                    
+
                 })
+                .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDBContext>();
             });
         }

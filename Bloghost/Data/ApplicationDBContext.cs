@@ -37,6 +37,7 @@ namespace Bloghost.Data
             //builder.Entity<User>()
             //    .HasMany(x => x.Comments)
             //    .WithOne(e => e.Author);
+
         }
     }
 }

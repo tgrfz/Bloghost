@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Bloghost.Domain
+@inject UserManager<User> UserManager
+@model IEnumerable<Bloghost.Domain.User>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>User list</h2>
+<hr/>
+
+<table class="table">
+    <tr>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>UserRole</th>
+        <th></th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>@((await UserManager.GetRolesAsync(user)).ToList()[0])</td>
+            @if (User.IsInRole("admin") && user.UserName != "admin")
+            {
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-controller="Users" asp-action="EditUser" asp-route-username="@user.UserName">Edit</a>
+                </td>
+            }
+        </tr>
+    }
+</table>

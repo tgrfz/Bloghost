@@ -9,7 +9,7 @@ namespace Bloghost.Areas.Identity
 {
     public class CustomUserValidator : UserValidator<User>
     {
-        public Task<IdentityResult> ValidateAsync(UserManager<User> manager, User user)
+        public override Task<IdentityResult> ValidateAsync(UserManager<User> manager, User user)
         {
             List<IdentityError> errors = new List<IdentityError>();
 

@@ -148,3 +148,5 @@ D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identit
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Views\Users\Index.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Views\Users\EditUser.cshtml.g.cs
