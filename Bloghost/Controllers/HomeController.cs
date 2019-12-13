@@ -18,13 +18,9 @@ namespace Bloghost.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private UserManager<User> _userManager;
-        private ApplicationDBContext db;
-        public HomeController(ILogger<HomeController> logger, ApplicationDBContext context, UserManager<User> userManager)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            db = context;
-            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -41,14 +37,6 @@ namespace Bloghost.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<IActionResult> SendEmail()
-        {
-            EmailService emailService = new EmailService(db);
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            await emailService.SendEmailAsync(user, "Тема письма", "Тест письма: тест!");
-            return RedirectToAction("Index");
         }
     }
 }

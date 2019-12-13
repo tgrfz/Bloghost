@@ -22,7 +22,7 @@ namespace Bloghost.Services
             Admin admin = db.Admins.First();
            
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("admin", admin.Email));
+            emailMessage.From.Add(new MailboxAddress("Bloghost admin", admin.Email));
             emailMessage.To.Add(new MailboxAddress(user.UserName, user.Email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)

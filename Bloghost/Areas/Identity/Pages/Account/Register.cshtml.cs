@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Bloghost.Domain;
+using Bloghost.Services;
+using Bloghost.Data;
+
 
 namespace Bloghost.Areas.Identity.Pages.Account
 {
@@ -25,19 +28,22 @@ namespace Bloghost.Areas.Identity.Pages.Account
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private ApplicationDBContext db;
 
         public RegisterModel(
             UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDBContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            db = context;
         }
 
         [BindProperty]
@@ -103,18 +109,19 @@ namespace Bloghost.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    EmailService emailService = new EmailService(db);
+                    await emailService.SendEmailAsync(user, "Confirm your email", $"<a href='{callbackUrl}'>Confirm your email</a>");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
+                        return RedirectToPage("Login");
                     }
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+
                 }
                 foreach (var error in result.Errors)
                 {
