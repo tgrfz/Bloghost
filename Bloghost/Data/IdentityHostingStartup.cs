@@ -1,5 +1,4 @@
 ﻿using System;
-using Bloghost.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -7,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Bloghost.Domain;
+using Bloghost.Data;
 
 [assembly: HostingStartup(typeof(Bloghost.Areas.Identity.IdentityHostingStartup))]
 namespace Bloghost.Areas.Identity
@@ -20,7 +20,7 @@ namespace Bloghost.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddTransient<UserValidator<User>, CustomUserValidator>();
+                services.AddTransient<UserValidator<User>>();
 
                 services.AddDefaultIdentity<User>(options => {
                     options.SignIn.RequireConfirmedAccount = true;

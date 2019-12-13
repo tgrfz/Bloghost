@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,13 +13,14 @@ namespace Bloghost.Data
 {
     public class ApplicationDBContext : IdentityDbContext<User>
     {
+        public DbSet<Admin> Admins { get; set; }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override async void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.Entity<User>()
@@ -34,10 +37,15 @@ namespace Bloghost.Data
                 .HasOne(x => x.Following)
                 .WithMany(e => e.Users)
                 .HasForeignKey(x => x.FollowingId);
-            //builder.Entity<User>()
-            //    .HasMany(x => x.Comments)
-            //    .WithOne(e => e.Author);
+            builder.Entity<Admin>().HasKey(x => x.Id);
 
+            Admin admin;
+            string path = @"D:\adminemail.json";
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            {
+                admin = await JsonSerializer.DeserializeAsync<Admin>(fs);
+            }
+            Admins.Add(admin);
         }
     }
 }

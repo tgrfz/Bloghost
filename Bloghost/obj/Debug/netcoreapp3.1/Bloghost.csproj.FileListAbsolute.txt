@@ -135,8 +135,6 @@ D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\Microsoft.AspNetCor
 D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.dll
 D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\Bloghost.StaticWebAssets.xml
 D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cs
-D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ConfirmEmail.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
@@ -150,3 +148,8 @@ D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identit
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Views\Users\Index.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Views\Users\EditUser.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\MailKit.dll
+D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\MimeKit.dll
+D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cache
