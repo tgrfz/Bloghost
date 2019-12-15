@@ -14,6 +14,9 @@ namespace Bloghost.Data
     public class ApplicationDBContext : IdentityDbContext<User>
     {
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
             : base(options)
         {

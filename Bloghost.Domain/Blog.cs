@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
 
 namespace Bloghost.Domain
 {
-    public class Comment
+    public class Blog
     {
         public int Id { get; set; }
-        public string Content { get; set; }
-        public Post Post { get; set; }
+        public string Title { get; set; }
         public DateTime CreateTime { get; set; }
         public User Author { get; set; }
-        public Comment()
+        public Blog()
         {
             CreateTime = DateTime.Now;
         }

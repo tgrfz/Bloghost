@@ -11,12 +11,10 @@ namespace Bloghost.Domain
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime CreateTime { get; set; }
-        public User Author { get; set; }
-        public List<Comment> Comments { get; set; }
+        public Blog Blog { get; set; }
         public Post()
         {
             CreateTime = DateTime.Now;
-            Comments = new List<Comment>();
         }
     }
 }

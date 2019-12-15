@@ -12,15 +12,21 @@ using Bloghost.Services;
 using Bloghost.Data;
 using Bloghost.Domain;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Bloghost.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager,
+            IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index()
@@ -37,6 +43,11 @@ namespace Bloghost.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> CreateBlog(string name)
+        {
+            return RedirectToAction("Create", "Blog", new { name });
         }
     }
 }

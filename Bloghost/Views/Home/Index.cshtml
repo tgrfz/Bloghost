@@ -1,7 +1,28 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using Bloghost.Domain
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+@if (SignInManager.IsSignedIn(User))
+{
     <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
+        <h1>@User.Identity.Name's blogs</h1>
+        <p>
+            <a class="btn btn-sm btn-primary" asp-controller="Home" asp-action="CreateBlog" asp-route-name="@UserManager.GetUserName(User)">Create new blog</a>
+        </p>
     </div>
+}
+else
+{
+    <div class="text-center">
+        <h1>Welcome</h1>
+        <p>Log in to create your blog</p>
+        <p>
+            <a class="btn btn-sm btn-primary" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+        </p>
+    </div>
+}
