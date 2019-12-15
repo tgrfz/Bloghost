@@ -32,6 +32,15 @@ namespace Bloghost.Data
                 .HasKey(x => x.Id);
             builder.Entity<Following>()
                 .HasKey(x => x.Id);
+            builder.Entity<Blog>()
+                .HasKey(x => x.Id);
+            builder.Entity<Post>()
+                .HasKey(x => x.Id);
+            builder.Entity<Comment>()
+                .HasKey(x => x.Id);
+            builder.Entity<Admin>()
+                .HasKey(x => x.Id);
+
             builder.Entity<User>()
                 .HasOne(x => x.Followers)
                 .WithMany(e => e.Users)
@@ -40,7 +49,6 @@ namespace Bloghost.Data
                 .HasOne(x => x.Following)
                 .WithMany(e => e.Users)
                 .HasForeignKey(x => x.FollowingId);
-            builder.Entity<Admin>().HasKey(x => x.Id);
 
             Admin admin;
             string path = @"D:\adminemail.json";

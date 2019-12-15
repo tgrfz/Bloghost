@@ -2,6 +2,7 @@
 @using Bloghost.Domain
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@model IQueryable<Blog>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -12,7 +13,13 @@
     <div class="text-center">
         <h1>@User.Identity.Name's blogs</h1>
         <p>
-            <a class="btn btn-sm btn-primary" asp-controller="Home" asp-action="CreateBlog" asp-route-name="@UserManager.GetUserName(User)">Create new blog</a>
+            @foreach (var blog in Model)
+            {
+                <a class="btn-link" asp-controller="Blog" asp-action="Index" asp-route-address="@blog.Address">@blog.Title</a>
+            }
+        </p>
+        <p>
+            <a class="btn btn-sm btn-primary" asp-controller="Blog" asp-action="Create">Create new blog</a>
         </p>
     </div>
 }

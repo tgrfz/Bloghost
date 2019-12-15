@@ -9,7 +9,8 @@ namespace Bloghost.Domain
         public int Id { get; set; }
         public string Title { get; set; }
         public DateTime CreateTime { get; set; }
-        public User Author { get; set; }
+        public string AuthorId { get; set; }
+        public string Address { get; set; }
         public Blog()
         {
             CreateTime = DateTime.Now;

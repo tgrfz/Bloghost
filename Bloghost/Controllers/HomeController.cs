@@ -21,17 +21,21 @@ namespace Bloghost.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private ApplicationDBContext db;
         public HomeController(ILogger<HomeController> logger, UserManager<User> userManager,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor, ApplicationDBContext dbContext)
         {
             _logger = logger;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
+            db = dbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
+            IQueryable<Blog> blogs = db.Blogs.Where<Blog>(p => p.AuthorId == userId);
+            return View(blogs);
         }
 
         public IActionResult Privacy()
@@ -43,11 +47,6 @@ namespace Bloghost.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<IActionResult> CreateBlog(string name)
-        {
-            return RedirectToAction("Create", "Blog", new { name });
         }
     }
 }

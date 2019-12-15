@@ -154,3 +154,4 @@ D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Create.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Index.cshtml.g.cs
