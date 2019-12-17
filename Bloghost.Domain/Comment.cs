@@ -9,7 +9,7 @@ namespace Bloghost.Domain
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public string PostId { get; set; }
+        public int PostId { get; set; }
         public DateTime CreateTime { get; set; }
         public string AuthorId { get; set; }
         public Comment()

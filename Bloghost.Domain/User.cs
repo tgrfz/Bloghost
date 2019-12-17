@@ -12,13 +12,10 @@ namespace Bloghost.Domain
         public Followers Followers { get; set; }
         public int FollowingId { get; set; }
         public Following Following { get; set; }
+        
         public User() : base()
         {
             CreateTime = DateTime.Now;
-            Followers = new Followers();
-            FollowersId = Followers.Id;
-            Following = new Following();
-            FollowingId = Following.Id;
         }
     }
 }

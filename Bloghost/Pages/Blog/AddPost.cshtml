@@ -1,0 +1,27 @@
+﻿@page
+@model Bloghost.Pages.Blog.AddPostModel
+@{
+    ViewData["Title"] = "Add post";
+}
+
+<h1>Add post to blog "@Model.CurBlog.Title"</h1>
+<div class="col-md-8">
+    <section>
+        <form id="blog" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Title">Title</label>
+                <input autocomplete="off" asp-for="Input.Title" class="form-control" />
+                <span asp-validation-for="Input.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Content">Content</label>
+                <textarea asp-for="Input.Content" class="form-control" rows="12"></textarea>
+                <span asp-validation-for="Input.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </section>
+</div>

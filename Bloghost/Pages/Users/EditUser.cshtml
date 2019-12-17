@@ -1,0 +1,27 @@
+﻿@page
+@using Bloghost.Domain
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@model Bloghost.Pages.Users.EditUserModel
+@{
+    ViewData["Title"] = "Edit user roles";
+}
+
+<div class="text-center bg-image">
+    <h2>@Model.ChangeRole.UserName</h2>
+</div>
+<hr />
+
+<form method="post">
+    <input type="hidden" name="username" value="@Model.ChangeRole.UserName" />
+    <div class="form-group">
+        @foreach (IdentityRole role in Model.ChangeRole.AllRoles)
+        {
+            <input type="radio" name="roles" value="@role.Name"
+                   @(Model.ChangeRole.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />
+            @role.Name
+            <br />
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

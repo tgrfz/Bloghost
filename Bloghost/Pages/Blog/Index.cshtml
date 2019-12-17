@@ -1,0 +1,18 @@
+﻿@page "{address}"
+@using Microsoft.AspNetCore.Identity
+@using Bloghost.Domain
+@inject UserManager<User> UserManager
+@model Bloghost.Pages.Blog.IndexModel
+@{
+    ViewData["Title"] = Model.CurBlog.Title;
+}
+
+<div class="text-center">
+    <h1>@Model.CurBlog.Title</h1>
+    @if (UserManager.GetUserId(User) == Model.CurBlog.AuthorId)
+    {
+        <div>
+            <a class="btn btn-sm btn-primary" asp-page="/Blog/AddPost" asp-route-blogAddress="@Model.CurBlog.Address">Add new post</a>
+        </div>
+    }
+</div>

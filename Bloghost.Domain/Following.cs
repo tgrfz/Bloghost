@@ -6,7 +6,7 @@ namespace Bloghost.Domain
 {
     public class Following
     {
-        public int Id { get; set;}
+        public int Id { get; set; }
         public List<User> Users { get; set; }
         public Following()
         {

@@ -1,0 +1,68 @@
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Bloghost.Domain;
+using Bloghost.Data;
+using Microsoft.AspNetCore.Authorization;
+
+namespace Bloghost.Pages.Blog
+{
+    [Authorize]
+    public class CreateModel : PageModel
+    {
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private ApplicationDBContext db;
+        public CreateModel(UserManager<User> userManager,
+            IHttpContextAccessor httpContextAccessor,
+            ApplicationDBContext dBContext)
+        {
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
+            db = dBContext;
+        }
+        public class InputModel
+        {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Title")]
+            public string Title { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+        }
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        [TempData]
+        public string ErrorMessage { get; set; }
+        public void OnGet()
+        {
+            if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                ModelState.AddModelError(string.Empty, ErrorMessage);
+            }
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            var sameAddress = db.Blogs.Where(p => p.Address == Input.Address);
+            if (sameAddress.Count() > 0)
+            {
+                ModelState.AddModelError(string.Empty, "Sorry, this blog address is not available.");
+                return Page();
+            }
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var blog = new Domain.Blog { AuthorId = user.Id, Title = Input.Title, Address = Input.Address };
+            db.Blogs.Add(blog);
+            await db.SaveChangesAsync();
+            return RedirectToPage($"/Blog/Index", new { address = blog.Address });
+        }
+    }
+}

@@ -11,7 +11,7 @@ namespace Bloghost.Domain
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime CreateTime { get; set; }
-        public string BlogId { get; set; }
+        public int BlogId { get; set; }
         public Post()
         {
             CreateTime = DateTime.Now;

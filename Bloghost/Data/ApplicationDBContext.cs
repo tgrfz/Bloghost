@@ -26,28 +26,30 @@ namespace Bloghost.Data
         protected override async void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<User>()
+            builder.Entity<Admin>()
+                .HasKey(x => x.Id);
+            builder.Entity<Blog>()
+                .HasKey(x => x.Id);
+            builder.Entity<Blog>()
+                .HasAlternateKey(x => x.Address);
+            builder.Entity<Comment>()
                 .HasKey(x => x.Id);
             builder.Entity<Followers>()
                 .HasKey(x => x.Id);
             builder.Entity<Following>()
                 .HasKey(x => x.Id);
-            builder.Entity<Blog>()
-                .HasKey(x => x.Id);
             builder.Entity<Post>()
                 .HasKey(x => x.Id);
-            builder.Entity<Comment>()
-                .HasKey(x => x.Id);
-            builder.Entity<Admin>()
+            builder.Entity<User>()
                 .HasKey(x => x.Id);
 
             builder.Entity<User>()
                 .HasOne(x => x.Followers)
-                .WithMany(e => e.Users)
+                .WithMany(x => x.Users)
                 .HasForeignKey(x => x.FollowersId);
             builder.Entity<User>()
                 .HasOne(x => x.Following)
-                .WithMany(e => e.Users)
+                .WithMany(x => x.Users)
                 .HasForeignKey(x => x.FollowingId);
 
             Admin admin;
