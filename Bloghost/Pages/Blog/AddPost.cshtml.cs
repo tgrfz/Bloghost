@@ -33,9 +33,14 @@ namespace Bloghost.Pages.Blog
             public string Title { get; set; }
 
             [Required]
-            [DataType(DataType.Text)]
+            [DataType(DataType.MultilineText)]
             [Display(Name = "Content")]
             public string Content { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Tags")]
+            public string Tags { get; set; }
         }
         [BindProperty]
         public InputModel Input { get; set; }
@@ -74,7 +79,8 @@ namespace Bloghost.Pages.Blog
             }
             CurBlog = blogs.First();
 
-            var post = new Domain.Post { BlogId = CurBlog.Id, Title = Input.Title, Content = Input.Content };
+            var tags = Input.Tags.Split(',');
+            var post = new Domain.Post { BlogId = CurBlog.Id, Title = Input.Title, Content = Input.Content, Tags = tags };
             db.Posts.Add(post);
             await db.SaveChangesAsync();
             return RedirectToPage($"/Blog/Index", new { address = CurBlog.Address });
