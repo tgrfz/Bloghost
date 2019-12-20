@@ -19,12 +19,12 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator")))
+                        {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Home/Index">Home</a>
+                            <a class="nav-link text-dark" href="/User/">My blogs</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Home/Privacy">Privacy</a>
-                        </li>
+                        }
                         @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator")))
                         {
                             <li class="nav-item">

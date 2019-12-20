@@ -40,29 +40,23 @@ namespace Bloghost.Pages.Blog
         [BindProperty]
         public InputModel Input { get; set; }
 
-        [TempData]
-        public string ErrorMessage { get; set; }
-        public void OnGet()
-        {
-            if (!string.IsNullOrEmpty(ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
-            }
-        }
-
         public async Task<IActionResult> OnPostAsync()
         {
-            var sameAddress = db.Blogs.Where(p => p.Address == Input.Address);
-            if (sameAddress.Count() > 0)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Sorry, this blog address is not available.");
-                return Page();
+                var sameAddress = db.Blogs.Where(p => p.Address == Input.Address);
+                if (sameAddress.Count() > 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Sorry, this blog address is not available.");
+                    return Page();
+                }
+                var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+                var blog = new Domain.Blog { AuthorId = user.Id, Title = Input.Title, Address = Input.Address };
+                db.Blogs.Add(blog);
+                await db.SaveChangesAsync();
+                return RedirectToPage($"/Blog/Index", new { address = blog.Address });
             }
-            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            var blog = new Domain.Blog { AuthorId = user.Id, Title = Input.Title, Address = Input.Address };
-            db.Blogs.Add(blog);
-            await db.SaveChangesAsync();
-            return RedirectToPage($"/Blog/Index", new { address = blog.Address });
+            return Page();
         }
     }
 }

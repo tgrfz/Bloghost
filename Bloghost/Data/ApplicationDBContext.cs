@@ -40,6 +40,8 @@ namespace Bloghost.Data
                 .HasKey(x => x.Id);
             builder.Entity<Post>()
                 .HasKey(x => x.Id);
+            builder.Entity<Post>()
+                .HasAlternateKey(x => x.Url);
             builder.Entity<User>()
                 .HasKey(x => x.Id);
 

@@ -1,0 +1,35 @@
+﻿@using Bloghost.Data
+@inject ApplicationDBContext db
+@model int
+
+@{ 
+    var Post = db.Posts.Find(Model);
+    var Blog = db.Blogs.Find(Post.BlogId);
+}
+
+<div style="font-family:Arial;">
+    <div class="row">
+        <div class="col-md-2 text-right" style="font-size:16px; margin:6pt">
+            <div>
+                <a href="/Blog/@Blog.Address">@Blog.Title</a>
+            </div>
+            <div>
+                <text style="color:dimgray">@Post.CreateTime.ToShortDateString()</text>
+            </div>
+            <br />
+            @foreach (var tag in Post.Tags)
+            {
+                <div>
+                    <a style="word-wrap:break-word">@tag</a>
+                </div>
+            }
+        </div>
+        <div class="col-md-8">
+            <h1>
+                <a style="color:black; font-size:larger; font-weight:700; word-wrap:break-word"  href="/Blog/@Blog.Address/Post/@Post.Url">@Post.Title</a>
+            </h1>
+            <hr style="width:inherit"/>
+            <pre style="font-size:16px; max-height:500px; overflow-y:scroll; white-space:pre-wrap; word-wrap:break-word">@Post.Content</pre>
+        </div>
+    </div>
+</div>

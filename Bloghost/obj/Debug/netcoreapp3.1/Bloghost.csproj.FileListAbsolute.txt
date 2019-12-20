@@ -156,5 +156,8 @@ D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewIm
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Index.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Users\EditUser.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Users\Index.cshtml.g.cs
-D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Post\Index.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\AddPost.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\Post.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewPost.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewPostCollection.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Home\UserBlogs.cshtml.g.cs

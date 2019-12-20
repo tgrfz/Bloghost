@@ -1,0 +1,90 @@
+﻿@page "/Blog/{blogAddress}/Post/{url}"
+@using Bloghost.Data
+@using Bloghost.Domain
+@using Microsoft.AspNetCore.Identity
+@inject ApplicationDBContext db
+@inject SignInManager<User> SignInManager
+@model Bloghost.Pages.Blog.PostModel
+@{
+    ViewData["Title"] = Model.Post.Title;
+}
+
+<div style="font-family:Arial">
+    <div class="row">
+        <div class="col-md-2 text-right" style="font-size:16px; margin:6pt">
+            <div>
+                <a href="/Blog/@Model.Blog.Address">@Model.Blog.Title</a>
+            </div>
+            <div>
+                <text style="color:dimgray">@Model.Post.CreateTime.ToShortDateString()</text>
+            </div>
+            <div>
+                <text style="color:dimgray">@Model.Post.CreateTime.ToShortTimeString()</text>
+            </div>
+            <br />
+            @foreach (var tag in Model.Post.Tags)
+            {
+                <div>
+                    <a style="word-wrap:break-word">@tag</a>
+                </div>
+            }
+        </div>
+        <div class="col-md-8">
+            <h1>
+                <a style="color:black; font-size:larger; font-weight:700; word-wrap:break-word">@Model.Post.Title</a>
+            </h1>
+            <pre style="font-size:16px; white-space:pre-wrap; word-wrap:break-word">@Model.Post.Content</pre>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-2" style="margin:6pt">
+
+    </div>
+    <div class="col-md-8">
+        <h2>Comments</h2>
+
+        @foreach (var comment in Model.Comments)
+        {
+            var author = db.Users.Find(comment.AuthorId);
+
+            <div style="font-family:Arial; margin: 8px">
+                <div class="row">
+                    <div>
+                        <a style="font-size:16px; margin:auto 8px" href="/">@author.UserName</a>
+                    </div>
+                    <div>
+                        <text style="color:dimgray; font-size:12px">@comment.CreateTime.ToShortDateString() at @comment.CreateTime.ToShortTimeString()</text>
+                    </div>
+                </div>
+                <div>
+                    <pre style="font-size:16px; white-space:pre-wrap; word-wrap:break-word">@comment.Content</pre>
+                </div>
+            </div>
+        }
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div style="margin:6px">
+                <form id="comment" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <textarea autocomplete="off" asp-for="Input.CommentContent" class="form-control"></textarea>
+                        <span asp-validation-for="Input.CommentContent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Add comment</button>
+                    </div>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div>
+                <text style="color:dimgray">Log in to add your comment</text>
+            </div>
+        }
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -45,22 +46,16 @@ namespace Bloghost.Pages.Blog
         [BindProperty]
         public InputModel Input { get; set; }
         public Domain.Blog CurBlog { get; set; }
-
-        [TempData]
-        public string ErrorMessage { get; set; }
         public async Task<IActionResult> OnGetAsync(string blogAddress)
         {
-            if (!string.IsNullOrEmpty(ErrorMessage))
+            try
             {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
+                CurBlog = db.Blogs.Where(p => p.Address == blogAddress).First();
             }
-
-            var blogs = db.Blogs.Where(p => p.Address == blogAddress);
-            if (blogs.Count() == 0)
+            catch
             {
-                return StatusCode(400);
+                return StatusCode(404);
             }
-            CurBlog = blogs.First();
 
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             if (user.Id != CurBlog.AuthorId)
@@ -69,21 +64,27 @@ namespace Bloghost.Pages.Blog
             }
             return Page();
         }
-
         public async Task<IActionResult> OnPostAsync(string blogAddress)
         {
-            var blogs = db.Blogs.Where(p => p.Address == blogAddress);
-            if (blogs.Count() == 0)
+            try
             {
-                return StatusCode(400);
+                CurBlog = db.Blogs.Where(p => p.Address == blogAddress).First();
             }
-            CurBlog = blogs.First();
-
-            var tags = Input.Tags.Split(',');
-            var post = new Domain.Post { BlogId = CurBlog.Id, Title = Input.Title, Content = Input.Content, Tags = tags };
-            db.Posts.Add(post);
-            await db.SaveChangesAsync();
-            return RedirectToPage($"/Blog/Index", new { address = CurBlog.Address });
+            catch
+            {
+                return StatusCode(404);
+            }
+            if (ModelState.IsValid)
+            {
+                var tags = Input.Tags?.Split(',');
+                var url = string.Join("-", new string[] { DateTime.Now.ToString("yyyy-MM-dd"), Input.Title.GetHashCode().ToString() });
+                //TODO: check if this url already exists
+                var post = new Domain.Post { BlogId = CurBlog.Id, Title = Input.Title, Content = Input.Content, Tags = tags, Url = url };
+                db.Posts.Add(post);
+                await db.SaveChangesAsync();
+                return RedirectToPage($"/Blog/Index", new { address = CurBlog.Address });
+            }
+            return Page();
         }
     }
 }

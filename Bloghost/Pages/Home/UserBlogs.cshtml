@@ -1,0 +1,20 @@
+﻿@page "/User/{username?}"
+@model Bloghost.UserBlogsModel
+@{
+    ViewData["Title"] = "UserBlogs";
+}
+
+<div class="text-center">
+    <h1>@Model.User.UserName's blogs</h1>
+    <p>
+        @foreach (var blog in Model.UserBlogs)
+        {
+            <div>
+                <a class="btn-link" href="/Blog/@blog.Address">@blog.Title</a>
+            </div>
+        }
+    </p>
+    <p>
+        <a class="btn btn-sm btn-primary" asp-page="/Blog/Create">Create new blog</a>
+    </p>
+</div>

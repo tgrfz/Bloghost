@@ -1,10 +1,12 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using Bloghost.Domain;
 using Microsoft.AspNetCore.Http;
 using Bloghost.Data;
-using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Bloghost.Pages.Blog
 {
@@ -22,10 +24,20 @@ namespace Bloghost.Pages.Blog
             db = dbContext;
         }
         public Domain.Blog CurBlog { get; set; }
-        public void OnGet(string address)
+        public List<Domain.Post> Posts { get; set; }
+        public IActionResult OnGet(string address)
         {
-            var tmp = db.Blogs.Where(p => p.Address == address);
-            CurBlog = tmp.First();
+            try
+            {
+                CurBlog = db.Blogs.Where(p => p.Address == address).First();
+            }
+            catch
+            {
+                return StatusCode(404);
+            }
+
+            Posts = db.Posts.Where(x => x.BlogId == CurBlog.Id).OrderByDescending(o => o.CreateTime).ToList();
+            return Page();
         }
     }
 }
