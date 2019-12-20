@@ -4,23 +4,24 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using Bloghost.Domain;
 using Bloghost.Data;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Bloghost.Services
 {
-    public class EmailService
+    public class EmailService : IEmailSender
     {
         private ApplicationDBContext db;
         public EmailService(ApplicationDBContext context)
         {
             db = context;
         }
-        public async Task SendEmailAsync(User user, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, string message)
         {
             Admin admin = db.Admins.First();
            
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress("Bloghost admin", admin.Email));
-            emailMessage.To.Add(new MailboxAddress(user.UserName, user.Email));
+            emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {

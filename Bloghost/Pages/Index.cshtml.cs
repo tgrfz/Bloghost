@@ -6,7 +6,7 @@ namespace Bloghost
 {
     public class IndexModel : PageModel
     {
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
             return RedirectToPage("Home/Index");
         }

@@ -109,8 +109,7 @@ namespace Bloghost.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    EmailService emailService = new EmailService(db);
-                    await emailService.SendEmailAsync(user, "Confirm your email", $"<a href='{callbackUrl}'>Confirm your email</a>");
+                    await _emailSender.SendEmailAsync(user.Email, "Confirm your email", $"<a href='{callbackUrl}'>Confirm your email</a>");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

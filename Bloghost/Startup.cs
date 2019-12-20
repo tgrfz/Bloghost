@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Bloghost.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Bloghost
 {
@@ -18,6 +20,7 @@ namespace Bloghost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IEmailSender, EmailService>();
             services.AddMvc();
             services.AddRazorPages();
             services.AddHttpContextAccessor();
@@ -26,16 +29,17 @@ namespace Bloghost
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //env.EnvironmentName = "Production";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/error?code={0}");
                 app.UseHsts();
             }
-            app.UseStatusCodePages();
+            app.UseStatusCodePagesWithRedirects("/error?code={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

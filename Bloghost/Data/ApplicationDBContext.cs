@@ -34,25 +34,12 @@ namespace Bloghost.Data
                 .HasAlternateKey(x => x.Address);
             builder.Entity<Comment>()
                 .HasKey(x => x.Id);
-            builder.Entity<Followers>()
-                .HasKey(x => x.Id);
-            builder.Entity<Following>()
-                .HasKey(x => x.Id);
             builder.Entity<Post>()
                 .HasKey(x => x.Id);
             builder.Entity<Post>()
                 .HasAlternateKey(x => x.Url);
             builder.Entity<User>()
                 .HasKey(x => x.Id);
-
-            builder.Entity<User>()
-                .HasOne(x => x.Followers)
-                .WithMany(x => x.Users)
-                .HasForeignKey(x => x.FollowersId);
-            builder.Entity<User>()
-                .HasOne(x => x.Following)
-                .WithMany(x => x.Users)
-                .HasForeignKey(x => x.FollowingId);
 
             Admin admin;
             string path = @"D:\adminemail.json";

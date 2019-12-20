@@ -1,11 +1,11 @@
 ﻿@page "/User/{username?}"
 @model Bloghost.UserBlogsModel
 @{
-    ViewData["Title"] = "UserBlogs";
+    ViewData["Title"] = $"{@Model.Username}'s Blogs";
 }
 
 <div class="text-center">
-    <h1>@Model.User.UserName's blogs</h1>
+    <h1>@Model.Username's blogs</h1>
     <p>
         @foreach (var blog in Model.UserBlogs)
         {
@@ -14,7 +14,10 @@
             </div>
         }
     </p>
-    <p>
-        <a class="btn btn-sm btn-primary" asp-page="/Blog/Create">Create new blog</a>
-    </p>
+    @if (User.Identity.Name == Model.Username)
+    {
+        <p>
+            <a class="btn btn-sm btn-primary" asp-page="/Blog/Create">Create new blog</a>
+        </p>
+    }
 </div>

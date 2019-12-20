@@ -28,9 +28,10 @@ namespace Bloghost
         }
 
         public IQueryable<Domain.Blog> UserBlogs { get; set; }
-        public User User { get; set; }
+        public string Username { get; set; }
         public async Task<IActionResult> OnGetAsync(string username = null)
         {
+            User User;
             if (username == null)
             {
                 User = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
@@ -42,6 +43,7 @@ namespace Bloghost
             if (User == null)
                 return RedirectToPage("/Home/Index");
 
+            Username = User.UserName;
             UserBlogs = db.Blogs.Where(p => p.AuthorId == User.Id);
             return Page();
         }
