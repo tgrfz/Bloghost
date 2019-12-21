@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Bloghost.Domain;
 using Bloghost.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Bloghost.Pages.Blog
 {
@@ -17,13 +18,15 @@ namespace Bloghost.Pages.Blog
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ApplicationDBContext db;
+        private readonly ILogger<CreateModel> _logger;
         public CreateModel(UserManager<User> userManager,
             IHttpContextAccessor httpContextAccessor,
-            ApplicationDBContext dBContext)
+            ApplicationDBContext dBContext, ILogger<CreateModel> logger)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
             db = dBContext;
+            _logger = logger;
         }
         public class InputModel
         {
@@ -54,6 +57,7 @@ namespace Bloghost.Pages.Blog
                 var blog = new Domain.Blog { AuthorId = user.Id, Title = Input.Title, Address = Input.Address };
                 db.Blogs.Add(blog);
                 await db.SaveChangesAsync();
+                _logger.LogInformation("User created a new blog.");
                 return RedirectToPage($"/Blog/Index", new { address = blog.Address });
             }
             return Page();

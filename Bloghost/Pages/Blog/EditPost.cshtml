@@ -1,0 +1,32 @@
+﻿@page "/Blog/{address}/PostEdit/{postUrl}"
+@model Bloghost.Pages.Blog.EditPostModel
+@{
+    ViewData["Title"] = "Add post";
+}
+
+<h1>Edit post</h1>
+<div class="col-md-8">
+    <section>
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Title">Title</label>
+                <input autocomplete="off" asp-for="Input.Title" class="form-control" />
+                <span asp-validation-for="Input.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Content">Content</label>
+                <textarea asp-for="Input.Content" class="form-control" rows="12"></textarea>
+                <span asp-validation-for="Input.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Tags">Comma separated list of tags</label>
+                <input autocomplete="off" asp-for="Input.Tags" class="form-control" />
+                <span asp-validation-for="Input.Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </section>
+</div>

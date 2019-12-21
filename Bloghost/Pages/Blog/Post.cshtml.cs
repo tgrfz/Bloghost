@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Bloghost.Pages.Blog
 {
@@ -16,13 +17,15 @@ namespace Bloghost.Pages.Blog
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ApplicationDBContext db;
+        private readonly ILogger<PostModel> _logger;
         public PostModel(UserManager<User> userManager,
             IHttpContextAccessor httpContextAccessor,
-            ApplicationDBContext dBContext)
+            ApplicationDBContext dBContext, ILogger<PostModel> logger)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
             db = dBContext;
+            _logger = logger;
         }
 
         public Post Post { get; set; }
@@ -69,6 +72,7 @@ namespace Bloghost.Pages.Blog
                 var comm = new Comment { AuthorId = user.Id, Content = Input.CommentContent, PostId = Post.Id };
                 db.Comments.Add(comm);
                 await db.SaveChangesAsync();
+                _logger.LogInformation("User created a new comment.");
                 return RedirectToAction("OnGet");
             }
             return Page();

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Bloghost.Domain;
 using Bloghost.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Bloghost.Pages.Blog
 {
@@ -18,13 +19,16 @@ namespace Bloghost.Pages.Blog
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ApplicationDBContext db;
+        private readonly ILogger<AddPostModel> _logger;
         public AddPostModel(UserManager<User> userManager,
             IHttpContextAccessor httpContextAccessor,
-            ApplicationDBContext dBContext)
+            ApplicationDBContext dBContext,
+            ILogger<AddPostModel> logger)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
             db = dBContext;
+            _logger = logger;
         }
         public class InputModel
         {
@@ -76,12 +80,13 @@ namespace Bloghost.Pages.Blog
             }
             if (ModelState.IsValid)
             {
-                var tags = Input.Tags?.Split(',');
+                var tags = Input.Tags?.Split(';');
                 var url = string.Join("-", new string[] { DateTime.Now.ToString("yyyy-MM-dd"), Input.Title.GetHashCode().ToString() });
                 //TODO: check if this url already exists
                 var post = new Domain.Post { BlogId = CurBlog.Id, Title = Input.Title, Content = Input.Content, Tags = tags, Url = url };
                 db.Posts.Add(post);
                 await db.SaveChangesAsync();
+                _logger.LogInformation("User created a new post.");
                 return RedirectToPage($"/Blog/Index", new { address = CurBlog.Address });
             }
             return Page();

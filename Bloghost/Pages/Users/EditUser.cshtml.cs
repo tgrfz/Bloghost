@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Bloghost.Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Bloghost.Pages.Users
 {
@@ -16,11 +17,14 @@ namespace Bloghost.Pages.Users
     {
         RoleManager<IdentityRole> _roleManager;
         UserManager<User> _userManager;
-        private User currentUser;
-        public EditUserModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        private readonly ILogger<EditUserModel> _logger;
+        public EditUserModel(RoleManager<IdentityRole> roleManager, 
+            UserManager<User> userManager, 
+            ILogger<EditUserModel> logger)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _logger = logger;
         }
         public class ChangeRoleModel
         {
@@ -56,13 +60,14 @@ namespace Bloghost.Pages.Users
 
         public async Task<IActionResult> OnPostAsync(string username, List<string> roles)
         {
-            currentUser = await _userManager.GetUserAsync(HttpContext.User);
             User user = await _userManager.FindByNameAsync(username);
             if (user != null)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
                 await _userManager.RemoveFromRolesAsync(user, userRoles);
+                _logger.LogInformation("User {0} removed from role {1}", user.UserName, userRoles[0]);
                 await _userManager.AddToRolesAsync(user, new List<string>() { roles[0] });
+                _logger.LogInformation("User {0} added to role {1}", user.UserName, roles[0]);
                 return RedirectToPage("/Users/Index");
             }
             return NotFound();

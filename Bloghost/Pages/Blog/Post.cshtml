@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject ApplicationDBContext db
 @inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @model Bloghost.Pages.Blog.PostModel
 @{
     ViewData["Title"] = Model.Post.Title;
@@ -30,9 +31,27 @@
             }
         </div>
         <div class="col-md-8">
-            <h1>
-                <a style="color:black; font-size:larger; font-weight:700; word-wrap:break-word">@Model.Post.Title</a>
-            </h1>
+            <div class="row">
+                <div style="margin:auto auto auto 12px">
+                    <h1>
+                        <a style="color:black; font-size:larger; font-weight:700; word-wrap:break-word">@Model.Post.Title</a>
+                    </h1>
+                </div>
+                @if (UserManager.GetUserId(User) == Model.Blog.AuthorId)
+                {
+                    <div style="margin:auto 15px auto auto">
+                        <a style="margin-right:6px" href="/Blog/@Model.Blog.Address/PostEdit/@Model.Post.Url">Edit</a>
+                        <a>Delete</a>
+                    </div>
+                }
+                else
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator")))
+                {
+                    <div style="margin:auto 15px auto auto">
+                        <a>Delete</a>
+                    </div>
+                }
+            </div>
             <pre style="font-size:16px; white-space:pre-wrap; word-wrap:break-word">@Model.Post.Content</pre>
         </div>
     </div>
@@ -54,11 +73,17 @@
             <div style="font-family:Arial; margin: 8px">
                 <div class="row">
                     <div>
-                        <a style="font-size:16px; margin:auto 8px" href="/">@author.UserName</a>
+                        <a style="font-size:16px; margin:auto 8px" href="/User/@author.UserName">@author.UserName</a>
                     </div>
                     <div>
                         <text style="color:dimgray; font-size:12px">@comment.CreateTime.ToShortDateString() at @comment.CreateTime.ToShortTimeString()</text>
                     </div>
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator")))
+                    {
+                        <div style="margin:auto 15px auto auto; font-size:14px">
+                            <a>Delete</a>
+                        </div>
+                    }
                 </div>
                 <div>
                     <pre style="font-size:16px; white-space:pre-wrap; word-wrap:break-word">@comment.Content</pre>
@@ -75,7 +100,7 @@
                         <span asp-validation-for="Input.CommentContent" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Add comment</button>
+                        <button id="commBtn" type="submit" class="btn btn-primary" onsubmit="Comment(@Model.Post.Id)">Add comment</button>
                     </div>
                 </form>
             </div>
@@ -88,3 +113,21 @@
         }
     </div>
 </div>
+
+<script src="~/js/signalr.min.js"></script>
+<script>
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/notifications")
+        .build();
+
+    hubConnection.on("Notify", function (username) {
+        alert("{0} commented your post.", username)
+    });
+
+    function Comment(id) {
+        hubConnection.invoke("Send", id);
+
+    };
+
+    hubConnection.start();
+</script>

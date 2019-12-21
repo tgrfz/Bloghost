@@ -7,12 +7,22 @@
     ViewData["Title"] = Model.CurBlog.Title;
 }
 
-<div class="text-center">
-    <h1>@Model.CurBlog.Title</h1>
+
+<div class="row">
+    <div>
+        <h1>@Model.CurBlog.Title</h1>
+    </div>
     @if (UserManager.GetUserId(User) == Model.CurBlog.AuthorId)
     {
-        <div>
+        <div style="margin:13px 10px">
             <a class="btn btn-sm btn-primary" asp-page="/Blog/AddPost" asp-route-blogAddress="@Model.CurBlog.Address">Add new post</a>
+        </div>
+        <div style="margin:13px 10px">
+            <form method="post">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-sm btn-primary">Delete blog</button>
+                </div>
+            </form>
         </div>
     }
 </div>
@@ -20,42 +30,8 @@
 @if (Model.Posts.Count > 0)
 {
     <br />
-    <br />
     <div class="posts" id="postsArea">
         @{await Html.RenderPartialAsync("~/Pages/_ViewPostCollection.cshtml", Model.Posts);}
     </div>
+    <br />
 }
-
-<script>
-    $(function () {
-        var pageNumber = 0;
-        var _inCallback = false;
-        function loadItems() {
-            if (pageNumber > -1 && _inCallback == false) {
-                _inCallback = true;
-                pageNumber++;
-                $.ajax({
-                    type: 'GET',
-                    url: '/',
-                    data: {
-                        pageNumber: pageNumber
-                    },
-                    success: function (data, textstatus) {
-                        if (data != '') {
-                            $(".posts").append(data);
-                        }
-                        else {
-                            pageNumber = -1;
-                        }
-                        _inCallback = false;
-                    }
-                });
-            }
-        }
-        $(window).scroll(function () {
-            if ($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-                loadItems();
-            }
-        });
-    })
-</script> 

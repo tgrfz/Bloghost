@@ -24,6 +24,7 @@ namespace Bloghost
             services.AddMvc();
             services.AddRazorPages();
             services.AddHttpContextAccessor();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +52,7 @@ namespace Bloghost
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapHub<NotificationHub>("/notifications");
             });
         }
     }

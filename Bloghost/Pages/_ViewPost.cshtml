@@ -1,8 +1,11 @@
 ﻿@using Bloghost.Data
 @inject ApplicationDBContext db
+@using Microsoft.AspNetCore.Identity
+@using Bloghost.Domain
+@inject UserManager<User> UserManager
 @model int
 
-@{ 
+@{
     var Post = db.Posts.Find(Model);
     var Blog = db.Blogs.Find(Post.BlogId);
 }
@@ -25,10 +28,28 @@
             }
         </div>
         <div class="col-md-8">
-            <h1>
-                <a style="color:black; font-size:larger; font-weight:700; word-wrap:break-word"  href="/Blog/@Blog.Address/Post/@Post.Url">@Post.Title</a>
-            </h1>
-            <hr style="width:inherit"/>
+            <div class="row">
+                <div style="margin:auto auto auto 12px">
+                    <h1>
+                        <a style="color:black; font-size:larger; font-weight:700; word-wrap:break-word" href="/Blog/@Blog.Address/Post/@Post.Url">@Post.Title</a>
+                    </h1>
+                </div>
+                @if (UserManager.GetUserId(User) == Blog.AuthorId)
+                {
+                    <div style="margin:auto 15px auto auto">
+                        <a style="margin-right:6px" href="/Blog/@Blog.Address/PostEdit/@Post.Url">Edit</a>
+                        <a>Delete</a>
+                    </div>
+                }
+                else
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator")))
+                {
+                    <div style="margin:auto 15px auto auto">
+                        <a>Delete</a>
+                    </div>
+                }
+            </div>
+            <hr style="width:inherit" />
             <pre style="font-size:16px; max-height:500px; overflow-y:scroll; white-space:pre-wrap; word-wrap:break-word">@Post.Content</pre>
         </div>
     </div>

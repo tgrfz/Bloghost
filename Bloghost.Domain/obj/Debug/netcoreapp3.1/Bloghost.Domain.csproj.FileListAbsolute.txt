@@ -2,7 +2,6 @@ D:\Projects\dotnet\bloghost\Bloghost.Domain\bin\Debug\netcoreapp3.1\Bloghost.Dom
 D:\Projects\dotnet\bloghost\Bloghost.Domain\bin\Debug\netcoreapp3.1\Bloghost.Domain.runtimeconfig.json
 D:\Projects\dotnet\bloghost\Bloghost.Domain\bin\Debug\netcoreapp3.1\Bloghost.Domain.runtimeconfig.dev.json
 D:\Projects\dotnet\bloghost\Bloghost.Domain\bin\Debug\netcoreapp3.1\Bloghost.Domain.dll
-D:\Projects\dotnet\bloghost\Bloghost.Domain\obj\Debug\netcoreapp3.1\Bloghost.Domain.csprojAssemblyReference.cache
 D:\Projects\dotnet\bloghost\Bloghost.Domain\obj\Debug\netcoreapp3.1\Bloghost.Domain.AssemblyInfoInputs.cache
 D:\Projects\dotnet\bloghost\Bloghost.Domain\obj\Debug\netcoreapp3.1\Bloghost.Domain.AssemblyInfo.cs
 D:\Projects\dotnet\bloghost\Bloghost.Domain\bin\Debug\netcoreapp3.1\Bloghost.Domain.pdb

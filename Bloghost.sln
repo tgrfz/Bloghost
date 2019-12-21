@@ -7,6 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloghost", "Bloghost\Blogho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloghost.Domain", "Bloghost.Domain\Bloghost.Domain.csproj", "{8C06C936-4E4B-4C13-BA60-FEF68D3FA3EB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE04D9FC-6BC8-427C-A30F-1184181196BF}"
+	ProjectSection(SolutionItems) = preProject
+		Bloghost\appsettings.Development.json = Bloghost\appsettings.Development.json
+		Bloghost\appsettings.json = Bloghost\appsettings.json
+		Bloghost\Bloghost.csproj = Bloghost\Bloghost.csproj
+		Bloghost\Bloghost.csproj.user = Bloghost\Bloghost.csproj.user
+		Bloghost\NotificationHub.cs = Bloghost\NotificationHub.cs
+		Bloghost\package.json = Bloghost\package.json
+		Bloghost\Program.cs = Bloghost\Program.cs
+		Bloghost\ScaffoldingReadMe.txt = Bloghost\ScaffoldingReadMe.txt
+		Bloghost\Startup.cs = Bloghost\Startup.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

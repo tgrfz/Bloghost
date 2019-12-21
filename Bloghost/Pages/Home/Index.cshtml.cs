@@ -13,7 +13,8 @@ namespace Bloghost.Pages.Home
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ApplicationDBContext db;
         public IndexModel(UserManager<User> userManager,
-            IHttpContextAccessor httpContextAccessor, ApplicationDBContext dbContext)
+            IHttpContextAccessor httpContextAccessor, 
+            ApplicationDBContext dbContext)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
