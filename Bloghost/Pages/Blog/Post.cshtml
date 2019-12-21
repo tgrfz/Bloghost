@@ -39,16 +39,16 @@
                 </div>
                 @if (UserManager.GetUserId(User) == Model.Blog.AuthorId)
                 {
-                    <div style="margin:auto 15px auto auto">
-                        <a style="margin-right:6px" href="/Blog/@Model.Blog.Address/PostEdit/@Model.Post.Url">Edit</a>
-                        <a>Delete</a>
+                    <div class="row" style="margin:auto 15px auto auto">
+                        <a class="btn btn-link" style="margin-right:6px" href="/Blog/@Model.Blog.Address/PostEdit/@Model.Post.Url">Edit</a>
+                        <form asp-page-handler="delete" method="post"><button class="btn btn-link">Delete</button></form>
                     </div>
                 }
                 else
                 @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator")))
                 {
                     <div style="margin:auto 15px auto auto">
-                        <a>Delete</a>
+                        <form asp-page-handler="delete" method="post"><button class="btn btn-link">Delete</button></form>
                     </div>
                 }
             </div>
@@ -93,7 +93,7 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <div style="margin:6px">
-                <form id="comment" method="post">
+                <form id="comment" method="post" asp-page-handler="comment">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <textarea autocomplete="off" asp-for="Input.CommentContent" class="form-control"></textarea>

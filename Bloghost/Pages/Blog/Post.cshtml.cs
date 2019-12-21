@@ -56,7 +56,7 @@ namespace Bloghost.Pages.Blog
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string blogAddress, string url)
+        public async Task<IActionResult> OnPostCommentAsync(string blogAddress, string url)
         {
             try
             {
@@ -76,6 +76,26 @@ namespace Bloghost.Pages.Blog
                 return RedirectToAction("OnGet");
             }
             return Page();
+        }
+        public async Task<IActionResult> OnPostDeleteAsync(string blogAddress, string url)
+        {
+            try
+            {
+                Post = db.Posts.Where(p => p.Url == url).First();
+            }
+            catch
+            {
+                return StatusCode(404);
+            }
+            var comments = db.Comments.Where(x => x.PostId == Post.Id).ToList();
+            foreach (var comm in comments)
+            {
+                db.Comments.Remove(comm);
+            }
+            db.Posts.Remove(Post);
+            await db.SaveChangesAsync();
+            _logger.LogInformation("User deleted post.");
+            return RedirectToPagePermanent("/Blog/Index", new { address = blogAddress });
         }
     }
 }

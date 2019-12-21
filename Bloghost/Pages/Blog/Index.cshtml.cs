@@ -30,7 +30,7 @@ namespace Bloghost.Pages.Blog
             Posts = db.Posts.Where(x => x.BlogId == CurBlog.Id).OrderByDescending(o => o.CreateTime).ToList();
             return Page();
         }
-        public async Task<IActionResult> OnPostAsync(string address)
+        public async Task<IActionResult> OnPostDeleteBlogAsync(string address)
         {
             try
             {

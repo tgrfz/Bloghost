@@ -18,7 +18,7 @@
             <a class="btn btn-sm btn-primary" asp-page="/Blog/AddPost" asp-route-blogAddress="@Model.CurBlog.Address">Add new post</a>
         </div>
         <div style="margin:13px 10px">
-            <form method="post">
+            <form method="post" asp-page-handler="deleteblog">
                 <div class="form-group">
                     <button type="submit" class="btn btn-sm btn-primary">Delete blog</button>
                 </div>

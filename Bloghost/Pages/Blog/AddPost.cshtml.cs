@@ -42,7 +42,6 @@ namespace Bloghost.Pages.Blog
             [Display(Name = "Content")]
             public string Content { get; set; }
 
-            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Tags")]
             public string Tags { get; set; }
