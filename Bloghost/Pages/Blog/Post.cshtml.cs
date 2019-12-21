@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Bloghost.Domain;
 using Bloghost.Data;
 using System.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -61,6 +62,8 @@ namespace Bloghost.Pages.Blog
             try
             {
                 Post = db.Posts.Where(x => x.Url == url).First();
+                Blog = db.Blogs.Find(Post.BlogId);
+                Comments = db.Comments.Where(x => x.PostId == Post.Id).OrderBy(x => x.CreateTime).ToList();
             }
             catch
             {
@@ -96,6 +99,15 @@ namespace Bloghost.Pages.Blog
             await db.SaveChangesAsync();
             _logger.LogInformation("User deleted post.");
             return RedirectToPagePermanent("/Blog/Index", new { address = blogAddress });
+        }
+
+        public async Task<IActionResult> OnPostDeleteCommentAsync(string blogAddress, string url, string commId)
+        {
+            var comment = db.Comments.Find(Int32.Parse(commId));
+            db.Comments.Remove(comment);
+            await db.SaveChangesAsync();
+            _logger.LogInformation("User deleted comment.");
+            return RedirectToAction("OnGet", new { blogAddress = blogAddress, url = url });
         }
     }
 }

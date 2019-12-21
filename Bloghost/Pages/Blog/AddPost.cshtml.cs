@@ -44,6 +44,8 @@ namespace Bloghost.Pages.Blog
 
             [DataType(DataType.Text)]
             [Display(Name = "Tags")]
+            [RegularExpression(@"^[a-zA-Z0-9_;]+$", ErrorMessage = "Uncorrect tag")]
+            [StringLength(20, MinimumLength = 2, ErrorMessage = "The length of the string must be between 2 and 20 characters")]
             public string Tags { get; set; }
         }
         [BindProperty]

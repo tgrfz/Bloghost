@@ -38,6 +38,8 @@ namespace Bloghost.Pages.Blog
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Address")]
+            [RegularExpression(@"^[a-zA-Z0-9_]+$", ErrorMessage = "Uncorrect address")]
+            [StringLength(32, MinimumLength = 3, ErrorMessage = "The length of the string must be between 3 and 32 characters")]
             public string Address { get; set; }
         }
         [BindProperty]

@@ -81,7 +81,7 @@
                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("moderator")))
                     {
                         <div style="margin:auto 15px auto auto; font-size:14px">
-                            <a>Delete</a>
+                            <form asp-page-handler="deletecomment" method="post" asp-route-commId="@comment.Id"><button class="btn btn-link">Delete</button></form>
                         </div>
                     }
                 </div>
