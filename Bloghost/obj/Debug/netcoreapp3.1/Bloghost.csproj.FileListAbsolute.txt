@@ -164,3 +164,4 @@ D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\System.Net.WebSocke
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\EditPost.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Search\Tag.cshtml.g.cs

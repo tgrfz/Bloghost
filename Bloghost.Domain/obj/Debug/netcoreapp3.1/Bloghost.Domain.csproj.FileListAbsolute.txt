@@ -7,3 +7,4 @@ D:\Projects\dotnet\bloghost\Bloghost.Domain\obj\Debug\netcoreapp3.1\Bloghost.Dom
 D:\Projects\dotnet\bloghost\Bloghost.Domain\bin\Debug\netcoreapp3.1\Bloghost.Domain.pdb
 D:\Projects\dotnet\bloghost\Bloghost.Domain\obj\Debug\netcoreapp3.1\Bloghost.Domain.dll
 D:\Projects\dotnet\bloghost\Bloghost.Domain\obj\Debug\netcoreapp3.1\Bloghost.Domain.pdb
+D:\Projects\dotnet\bloghost\Bloghost.Domain\obj\Debug\netcoreapp3.1\Bloghost.Domain.csprojAssemblyReference.cache

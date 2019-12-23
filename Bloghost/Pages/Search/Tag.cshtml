@@ -1,0 +1,19 @@
+﻿@page "/Tag/{tag}"
+@using Microsoft.AspNetCore.Identity
+@using Bloghost.Domain
+@inject UserManager<User> UserManager
+@model Bloghost.Pages.Search.TagModel
+@{
+    ViewData["Title"] = Model.Tag;
+}
+
+<h1>Tag: @Model.Tag</h1>
+
+@if (Model.Posts.Count > 0)
+{
+    <br />
+    <div class="posts" id="postsArea">
+        @{await Html.RenderPartialAsync("~/Pages/_ViewPostCollection.cshtml", Model.Posts);}
+    </div>
+    <br />
+}
