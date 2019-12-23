@@ -161,7 +161,10 @@ D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\_ViewPo
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Home\UserBlogs.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\package.json
 D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\System.Net.WebSockets.WebSocketProtocol.dll
-D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cs
-D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\EditPost.cshtml.g.cs
 D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Razor\Pages\Search\Tag.cshtml.g.cs
+D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SignalR.Client.dll
+D:\Projects\dotnet\bloghost\Bloghost\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.SignalR.Client.Core.dll
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cs
+D:\Projects\dotnet\bloghost\Bloghost\obj\Debug\netcoreapp3.1\Bloghost.MvcApplicationPartsAssemblyInfo.cache

@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace Bloghost.Pages.Blog
 {
@@ -19,6 +20,7 @@ namespace Bloghost.Pages.Blog
         private readonly IHttpContextAccessor _httpContextAccessor;
         private ApplicationDBContext db;
         private readonly ILogger<PostModel> _logger;
+        private HubConnection hubConnection;
         public PostModel(UserManager<User> userManager,
             IHttpContextAccessor httpContextAccessor,
             ApplicationDBContext dBContext, ILogger<PostModel> logger)
@@ -27,6 +29,13 @@ namespace Bloghost.Pages.Blog
             _httpContextAccessor = httpContextAccessor;
             db = dBContext;
             _logger = logger;
+            hubConnection = new HubConnectionBuilder().WithUrl("https://localhost:44318/notifications").Build();
+            hubConnection.StartAsync();
+
+            hubConnection.On<string, string>("Notify", async (username, postname) =>
+            {
+                await Response.WriteAsync($"<script>var notification = new Notification('{username} commented post {postname}');</script>");
+            });
         }
 
         public Post Post { get; set; }
@@ -76,10 +85,14 @@ namespace Bloghost.Pages.Blog
                 db.Comments.Add(comm);
                 await db.SaveChangesAsync();
                 _logger.LogInformation("User created a new comment.");
+
+                await hubConnection.InvokeAsync("Send", user.UserName, Post.Title);
+
                 return RedirectToAction("OnGet");
             }
             return Page();
         }
+
         public async Task<IActionResult> OnPostDeleteAsync(string blogAddress, string url)
         {
             try
